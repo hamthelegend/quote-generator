@@ -24,7 +24,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun onRefreshQuote() {
-        quote = quote?.category?.getRandomQuote()
+        quote = quote?.category?.getRandomQuote(previousQuote = quote)
     }
 
     fun onHideQuote() {
