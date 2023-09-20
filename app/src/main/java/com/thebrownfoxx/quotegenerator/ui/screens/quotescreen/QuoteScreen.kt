@@ -1,7 +1,6 @@
 package com.thebrownfoxx.quotegenerator.ui.screens.quotescreen
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ContentTransform
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontVariation.weight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.thebrownfoxx.quotegenerator.R
@@ -57,24 +55,25 @@ fun QuoteScreen(
                 .fillMaxSize()
                 .systemBarsPadding(),
         ) {
-            AnimatedContent(
-                targetState = quote,
-                transitionSpec = { density.sharedXAxis() },
-                modifier = Modifier.weight(1f)
-            ) { quote ->
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
-                    modifier = Modifier
-                        .padding(24.dp)
-                        .fillMaxSize(),
-                ) {
-                    Icon(
-                        imageVector = quote.category.icon,
-                        contentDescription = stringResource(
-                            quote.category.iconContentDescriptionResourceId
-                        ),
-                    )
-                    Text(text = label.uppercase())
+            // TODO: Extract this layout and use it for the quote of the day as well?
+            Column(
+                verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+                modifier = Modifier
+                    .padding(24.dp)
+                    .fillMaxWidth()
+                    .weight(1f),
+            ) {
+                Icon(
+                    imageVector = quote.category.icon,
+                    contentDescription = stringResource(
+                        quote.category.iconContentDescriptionResourceId
+                    ),
+                )
+                Text(text = label.uppercase())
+                AnimatedContent(
+                    targetState = quote,
+                    transitionSpec = { density.sharedXAxis() },
+                ) { quote ->
                     Text(
                         text = quote.value,
                         style = MaterialTheme.typography.titleLarge,
