@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Quote Generator</string>
+    <string name="quote_of_the_day">Quote of the day</string>
+
+    <string name="quote_icon">Quote icon</string>
+    <string name="heart_icon">Heart icon</string>
+    <string name="inspiration_icon">Inspiration icon</string>
+    <string name="laughing_face_icon">Laughing face icon</string>
+    <string name="star_icon">Star icon</string>
+
+    <string name="love_quotes">Love Quotes</string>
+    <string name="inspirational_quotes">Inspirational Quotes</string>
+    <string name="funny_quotes">Funny Quotes</string>
+    <string name="favorite_quote">Favorite Quote</string>
+    <string name="love_quote">Love Quote</string>
+    <string name="inspirational_quote">Inspirational Quote</string>
+    <string name="funny_quote">Funny Quote</string>
+    <string name="refresh_icon">Refresh icon</string>
+    <string name="new_quote">New quote</string>
+</resources>
