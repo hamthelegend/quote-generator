@@ -1,6 +1,7 @@
 package com.thebrownfoxx.quotegenerator.ui.screens.favorite
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import com.thebrownfoxx.quotegenerator.logic.FavoriteQuote
 import com.thebrownfoxx.quotegenerator.ui.SampleQuote
 import com.thebrownfoxx.quotegenerator.ui.components.CloseButton
 import com.thebrownfoxx.quotegenerator.ui.components.Quote
+import com.thebrownfoxx.quotegenerator.ui.extension.formatted
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorIcons
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 import java.time.LocalDate
@@ -60,8 +62,8 @@ fun FavoriteQuoteScreen(
                     iconContentDescription = stringResource(id = R.string.star_icon),
                     label = stringResource(id = R.string.favorite_quote),
                 )
-                if (favoriteQuote != null) {
-                    Text(text = favoriteQuote.dateFavorited.toEpochDay().toString())
+                AnimatedVisibility(favoriteQuote != null) {
+                    Text(text = favoriteQuote?.dateFavorited?.formatted() ?: "")
                 }
             }
             Row(
@@ -70,10 +72,11 @@ fun FavoriteQuoteScreen(
                 modifier = modifier.fillMaxWidth(),
             ) {
                 CloseButton(onClick = onClose)
-                if (favoriteQuote != null) {
-                    UnfavoriteButton(onClick = onUnfavorite)
-                    Spacer(modifier = Modifier.padding(32.dp))
-                }
+                UnfavoriteButton(
+                    onClick = onUnfavorite,
+                    enabled = favoriteQuote != null,
+                )
+                Spacer(modifier = Modifier.padding(32.dp))
             }
         }
     }
