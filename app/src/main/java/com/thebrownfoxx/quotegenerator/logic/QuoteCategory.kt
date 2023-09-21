@@ -12,7 +12,6 @@ enum class QuoteCategory(val quotes: List<String>) {
     Love(
         listOf(
             "Incest is best; put your brother to the test. - How to Get Away With Murder",
-            "Life is not a bed of roses neither it is full of thorns. Prosperity in every field of life never comes to you on its own. YOU HAVE TO STRUGGLE HARD TO GET TO IT. - Herbivore",
             "Love is the masterpiece that two souls paint together on the canvas of life.",
             "In the symphony of existence, our love is the most beautiful melody.",
             "Love is the language our hearts speak fluently, transcending all barriers.",
@@ -27,6 +26,7 @@ enum class QuoteCategory(val quotes: List<String>) {
     ),
     Inspirational(
         listOf(
+            "Life is not a bed of roses neither it is full of thorns. Prosperity in every field of life never comes to you on its own. YOU HAVE TO STRUGGLE HARD TO GET TO IT. - Herbivore",
             "Life's challenges are the chisels that carve the masterpiece of your character.",
             "Your dreams are the stars that guide you through the darkest nights of doubt.",
             "In every setback, there's a hidden opportunity waiting to be uncovered.",

@@ -1,5 +1,6 @@
 package com.thebrownfoxx.quotegenerator.ui.screens.quotescreen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,10 @@ fun QuoteScreen(
     onFavorite: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    BackHandler {
+        onClose()
+    }
+
     val density = LocalDensity.current
 
     val label = stringResource(
