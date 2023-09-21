@@ -1,9 +1,5 @@
 package com.thebrownfoxx.quotegenerator
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,29 +19,11 @@ import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 import com.thebrownfoxx.quotegenerator.ui.transitions.sharedZAxis
 
 class MainActivity : ComponentActivity() {
-
-    var onDateChange: (() -> Unit)? = null
-
-    private val dateChangedReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            val action = intent?.action
-            if (action == Intent.ACTION_DATE_CHANGED) {
-                onDateChange?.invoke()
-            }
-        }
-    }
+    val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        val viewModel: MainViewModel by viewModels()
-        onDateChange = viewModel::onDateChange
-
-        IntentFilter(Intent.ACTION_DATE_CHANGED).also {
-            registerReceiver(dateChangedReceiver, it)
-        }
-
         setContent {
             viewModel.apply {
                 val favoriteQuote by favoriteQuote.collectAsState(null)
@@ -81,6 +59,7 @@ class MainActivity : ComponentActivity() {
                                         quoteOfTheDay = quoteOfTheDay,
                                         onShowQuoteCategory = ::onShowQuote,
                                         onShowFavoriteQuote = ::onShowFavoriteQuote,
+                                        hasFavoriteQuote = favoriteQuote != null,
                                     )
                                 }
 
@@ -100,5 +79,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onUpdateQuoteOfTheDay()
     }
 }

@@ -27,6 +27,7 @@ fun HomeScreen(
     quoteOfTheDay: Quote,
     onShowQuoteCategory: (QuoteCategory) -> Unit,
     onShowFavoriteQuote: () -> Unit,
+    hasFavoriteQuote: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Surface {
@@ -63,6 +64,7 @@ fun HomeScreen(
             FavoriteQuoteButton(
                 onClick = onShowFavoriteQuote,
                 modifier = Modifier.fillMaxWidth(),
+                enabled = hasFavoriteQuote,
             )
         }
     }
@@ -76,6 +78,7 @@ fun HomeScreenPreview() {
             quoteOfTheDay = SampleQuote,
             onShowQuoteCategory = {},
             onShowFavoriteQuote = {},
+            hasFavoriteQuote = true,
         )
     }
 }

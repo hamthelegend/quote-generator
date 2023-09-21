@@ -29,7 +29,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     var showFavoriteQuote by mutableStateOf(false)
         private set
 
-    fun onDateChange() {
+    fun onUpdateQuoteOfTheDay() {
         quoteOfTheDay = getQuoteOfTheDay()
     }
 

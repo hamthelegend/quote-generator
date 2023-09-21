@@ -17,6 +17,7 @@ import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 fun FavoriteQuoteButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
 ) {
     HugeAssButton(
         icon = QuoteGeneratorIcons.Star,
@@ -24,6 +25,7 @@ fun FavoriteQuoteButton(
         text = stringResource(R.string.favorite_quote),
         color = MaterialTheme.colorScheme.tertiaryContainer,
         onClick = onClick,
+        enabled = enabled,
         modifier = modifier,
     )
 }
