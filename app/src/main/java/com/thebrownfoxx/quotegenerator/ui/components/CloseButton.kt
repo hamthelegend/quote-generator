@@ -1,4 +1,4 @@
-package com.thebrownfoxx.quotegenerator.ui.screens.quotescreen
+package com.thebrownfoxx.quotegenerator.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.twotone.Close
@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.thebrownfoxx.quotegenerator.ui.components.FilledIconButton
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorIcons
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 

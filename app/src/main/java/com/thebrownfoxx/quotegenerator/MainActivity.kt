@@ -12,13 +12,14 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.core.view.WindowCompat
+import com.thebrownfoxx.quotegenerator.ui.screens.favorite.FavoriteQuoteScreen
 import com.thebrownfoxx.quotegenerator.ui.screens.home.HomeScreen
-import com.thebrownfoxx.quotegenerator.ui.screens.quotescreen.QuoteScreen
+import com.thebrownfoxx.quotegenerator.ui.screens.quote.QuoteScreen
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
-import com.thebrownfoxx.quotegenerator.ui.transitions.sharedXAxis
 import com.thebrownfoxx.quotegenerator.ui.transitions.sharedZAxis
 
 class MainActivity : ComponentActivity() {
@@ -46,35 +47,53 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            QuoteGeneratorTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    viewModel.apply {
+            viewModel.apply {
+                val favoriteQuote by favoriteQuote.collectAsState(null)
+
+                QuoteGeneratorTheme {
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
                         AnimatedContent(
-                            targetState = quote,
+                            targetState = quote to showFavoriteQuote,
                             transitionSpec = {
-                                sharedZAxis(targetState != null)
+                                val (quote, showFavoriteQuote) = targetState
+                                sharedZAxis(forward = showFavoriteQuote || quote != null)
                             },
-                            contentKey = { it != null },
-                            modifier = Modifier.fillMaxSize()
-                        ) { quote ->
-                            if (quote == null) {
-                                HomeScreen(
-                                    quoteOfTheDay = quoteOfTheDay,
-                                    onShowQuoteCategory = ::onShowQuote,
-                                    onShowFavoriteQuote = ::onShowFavoriteQuote,
-                                )
-                            } else {
-                                QuoteScreen(
-                                    quote = quote,
-                                    favorite = false,
-                                    onClose = ::onHideQuote,
-                                    onRefresh = ::onRefreshQuote,
-                                    onFavorite = ::onFavoriteQuote,
-                                )
+                            contentKey = { (quote, showFavoriteQuote) ->
+                                quote != null || showFavoriteQuote
+                            },
+                            modifier = Modifier.fillMaxSize(),
+                        ) { (quote, showFavoriteQuote) ->
+                            when {
+                                showFavoriteQuote -> {
+                                    FavoriteQuoteScreen(
+                                        favoriteQuote = favoriteQuote,
+                                        onClose = ::onHideFavoriteQuote,
+                                        onUnfavorite = ::onUnfavoriteQuote,
+                                    )
+                                }
+
+                                quote == null -> {
+                                    HomeScreen(
+                                        quoteOfTheDay = quoteOfTheDay,
+                                        onShowQuoteCategory = ::onShowQuote,
+                                        onShowFavoriteQuote = ::onShowFavoriteQuote,
+                                    )
+                                }
+
+                                else -> {
+                                    QuoteScreen(
+                                        quote = quote,
+                                        favorite = favoriteQuote?.quote == quote,
+                                        onClose = ::onHideQuote,
+                                        onRefresh = ::onRefreshQuote,
+                                        onFavorite = ::onFavoriteQuote,
+                                        onUnfavorite = ::onUnfavoriteQuote,
+                                    )
+                                }
                             }
                         }
                     }

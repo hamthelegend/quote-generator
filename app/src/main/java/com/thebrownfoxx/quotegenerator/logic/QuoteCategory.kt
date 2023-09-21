@@ -3,11 +3,6 @@ package com.thebrownfoxx.quotegenerator.logic
 import java.time.LocalDate
 import kotlin.random.Random
 
-data class Quote(
-    val value: String,
-    val category: QuoteCategory,
-)
-
 enum class QuoteCategory(val quotes: List<String>) {
     Love(
         listOf(

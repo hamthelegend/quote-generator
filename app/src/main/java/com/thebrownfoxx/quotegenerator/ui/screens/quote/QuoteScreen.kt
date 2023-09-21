@@ -1,7 +1,6 @@
-package com.thebrownfoxx.quotegenerator.ui.screens.quotescreen
+package com.thebrownfoxx.quotegenerator.ui.screens.quote
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,14 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,10 +19,11 @@ import com.thebrownfoxx.quotegenerator.R
 import com.thebrownfoxx.quotegenerator.logic.Quote
 import com.thebrownfoxx.quotegenerator.logic.QuoteCategory
 import com.thebrownfoxx.quotegenerator.ui.SampleQuote
+import com.thebrownfoxx.quotegenerator.ui.components.CloseButton
+import com.thebrownfoxx.quotegenerator.ui.components.Quote
 import com.thebrownfoxx.quotegenerator.ui.components.icon
 import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescriptionResourceId
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
-import com.thebrownfoxx.quotegenerator.ui.transitions.sharedXAxis
 
 @Composable
 fun QuoteScreen(
@@ -36,13 +32,12 @@ fun QuoteScreen(
     onClose: () -> Unit,
     onRefresh: () -> Unit,
     onFavorite: () -> Unit,
+    onUnfavorite: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BackHandler {
         onClose()
     }
-
-    val density = LocalDensity.current
 
     val label = stringResource(
         when (quote.category) {
@@ -60,7 +55,6 @@ fun QuoteScreen(
                 .fillMaxSize()
                 .systemBarsPadding(),
         ) {
-            // TODO: Extract this layout and use it for the quote of the day as well?
             Column(
                 verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
                 modifier = Modifier
@@ -68,22 +62,14 @@ fun QuoteScreen(
                     .fillMaxWidth()
                     .weight(1f),
             ) {
-                Icon(
-                    imageVector = quote.category.icon,
-                    contentDescription = stringResource(
+                Quote(
+                    quote = quote.value,
+                    icon = quote.category.icon,
+                    iconContentDescription = stringResource(
                         quote.category.iconContentDescriptionResourceId
                     ),
+                    label = label,
                 )
-                Text(text = label.uppercase())
-                AnimatedContent(
-                    targetState = quote,
-                    transitionSpec = { density.sharedXAxis() },
-                ) { quote ->
-                    Text(
-                        text = quote.value,
-                        style = MaterialTheme.typography.titleLarge,
-                    )
-                }
             }
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
@@ -92,7 +78,10 @@ fun QuoteScreen(
             ) {
                 CloseButton(onClick = onClose)
                 RefreshButton(onClick = onRefresh)
-                FavoriteButton(favorite = favorite, onClick = onFavorite)
+                FavoriteButton(
+                    favorite = favorite,
+                    onClick = if (favorite) onUnfavorite else onFavorite
+                )
             }
         }
     }
@@ -108,6 +97,7 @@ fun QuoteScreenPreview() {
             onClose = {},
             onRefresh = {},
             onFavorite = {},
+            onUnfavorite = {},
         )
     }
 }

@@ -1,9 +1,11 @@
-package com.thebrownfoxx.quotegenerator.ui.screens.quotescreen
+package com.thebrownfoxx.quotegenerator.ui.screens.quote
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.twotone.Star
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,9 +21,10 @@ fun FavoriteButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val color =
+    val color by animateColorAsState(
         if (favorite) MaterialTheme.colorScheme.tertiary
         else MaterialTheme.colorScheme.tertiaryContainer
+    )
 
     FilledIconButton(
         icon = QuoteGeneratorIcons.Star,

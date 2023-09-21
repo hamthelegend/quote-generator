@@ -6,11 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material.icons.twotone.FormatQuote
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +17,9 @@ import com.thebrownfoxx.quotegenerator.R
 import com.thebrownfoxx.quotegenerator.logic.Quote
 import com.thebrownfoxx.quotegenerator.logic.QuoteCategory
 import com.thebrownfoxx.quotegenerator.ui.SampleQuote
-import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorIcons
+import com.thebrownfoxx.quotegenerator.ui.components.Quote
+import com.thebrownfoxx.quotegenerator.ui.components.icon
+import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescriptionResourceId
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 
 @Composable
@@ -46,14 +44,13 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .weight(1f),
             ) {
-                Icon(
-                    imageVector = QuoteGeneratorIcons.FormatQuote,
-                    contentDescription = stringResource(R.string.quote_icon),
-                )
-                Text(text = stringResource(R.string.quote_of_the_day).uppercase())
-                Text(
-                    text = quoteOfTheDay.value,
-                    style = MaterialTheme.typography.titleLarge,
+                Quote(
+                    quote = quoteOfTheDay.value,
+                    icon = quoteOfTheDay.category.icon,
+                    iconContentDescription = stringResource(
+                        quoteOfTheDay.category.iconContentDescriptionResourceId
+                    ),
+                    label = stringResource(R.string.quote_of_the_day),
                 )
             }
             for (category in QuoteCategory.values()) {

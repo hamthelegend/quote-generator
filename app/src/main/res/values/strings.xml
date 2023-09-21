@@ -17,4 +17,5 @@
     <string name="funny_quote">Funny Quote</string>
     <string name="refresh_icon">Refresh icon</string>
     <string name="new_quote">New quote</string>
+    <string name="no_favorite_quote_guide">Favorite a quote first.</string>
 </resources>
