@@ -19,7 +19,7 @@ import com.thebrownfoxx.quotegenerator.R
 import com.thebrownfoxx.quotegenerator.logic.Quote
 import com.thebrownfoxx.quotegenerator.logic.QuoteCategory
 import com.thebrownfoxx.quotegenerator.ui.SampleQuote
-import com.thebrownfoxx.quotegenerator.ui.components.CloseButton
+import com.thebrownfoxx.quotegenerator.ui.components.BackButton
 import com.thebrownfoxx.quotegenerator.ui.components.Quote
 import com.thebrownfoxx.quotegenerator.ui.components.icon
 import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescriptionResourceId
@@ -29,14 +29,14 @@ import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 fun QuoteScreen(
     quote: Quote,
     favorite: Boolean,
-    onClose: () -> Unit,
+    onGoBack: () -> Unit,
     onRefresh: () -> Unit,
     onFavorite: () -> Unit,
     onUnfavorite: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     BackHandler {
-        onClose()
+        onGoBack()
     }
 
     val label = stringResource(
@@ -76,7 +76,7 @@ fun QuoteScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = modifier.fillMaxWidth(),
             ) {
-                CloseButton(onClick = onClose)
+                BackButton(onClick = onGoBack)
                 RefreshButton(onClick = onRefresh)
                 FavoriteButton(
                     favorite = favorite,
@@ -94,7 +94,7 @@ fun QuoteScreenPreview() {
         QuoteScreen(
             quote = SampleQuote,
             favorite = false,
-            onClose = {},
+            onGoBack = {},
             onRefresh = {},
             onFavorite = {},
             onUnfavorite = {},

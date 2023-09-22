@@ -38,22 +38,18 @@ fun HomeScreen(
                 .systemBarsPadding(),
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         ) {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+            Quote(
+                quote = quoteOfTheDay.value,
+                icon = quoteOfTheDay.category.icon,
+                iconContentDescription = stringResource(
+                    quoteOfTheDay.category.iconContentDescriptionResourceId
+                ),
+                label = stringResource(R.string.quote_of_the_day),
                 modifier = Modifier
                     .padding(24.dp)
                     .fillMaxWidth()
                     .weight(1f),
-            ) {
-                Quote(
-                    quote = quoteOfTheDay.value,
-                    icon = quoteOfTheDay.category.icon,
-                    iconContentDescription = stringResource(
-                        quoteOfTheDay.category.iconContentDescriptionResourceId
-                    ),
-                    label = stringResource(R.string.quote_of_the_day),
-                )
-            }
+            )
             for (category in QuoteCategory.values()) {
                 QuoteCategoryButton(
                     category = category,

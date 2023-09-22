@@ -4,7 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.twotone.Star
+import androidx.compose.material.icons.twotone.Remove
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,11 +28,11 @@ fun UnfavoriteButton(
     enabled: Boolean = true,
 ) {
     val color by animateColorAsState(
-        if (enabled) MaterialTheme.colorScheme.tertiary
+        if (enabled) MaterialTheme.colorScheme.errorContainer
         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
     )
     val contentColor by animateColorAsState(
-        if (enabled) MaterialTheme.colorScheme.onTertiary
+        if (enabled) MaterialTheme.colorScheme.onErrorContainer
         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
     )
 
@@ -46,7 +46,7 @@ fun UnfavoriteButton(
         enabled = enabled,
     ) {
         Icon(
-            imageVector = QuoteGeneratorIcons.Star,
+            imageVector = QuoteGeneratorIcons.Remove,
             contentDescription = stringResource(R.string.refresh_icon),
             modifier = Modifier
                 .padding(32.dp)

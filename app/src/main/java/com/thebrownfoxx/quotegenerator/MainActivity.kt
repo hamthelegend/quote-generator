@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                                 showFavoriteQuote -> {
                                     FavoriteQuoteScreen(
                                         favoriteQuote = favoriteQuote,
-                                        onClose = ::onHideFavoriteQuote,
+                                        onGoBack = ::onHideFavoriteQuote,
                                         onUnfavorite = ::onUnfavoriteQuote,
                                     )
                                 }
@@ -67,7 +67,7 @@ class MainActivity : ComponentActivity() {
                                     QuoteScreen(
                                         quote = quote,
                                         favorite = favoriteQuote?.quote == quote,
-                                        onClose = ::onHideQuote,
+                                        onGoBack = ::onHideQuote,
                                         onRefresh = ::onRefreshQuote,
                                         onFavorite = ::onFavoriteQuote,
                                         onUnfavorite = ::onUnfavoriteQuote,
