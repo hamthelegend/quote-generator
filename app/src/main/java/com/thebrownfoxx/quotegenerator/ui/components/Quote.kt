@@ -11,10 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.thebrownfoxx.quotegenerator.ui.extension.formatted
 import com.thebrownfoxx.quotegenerator.ui.transitions.sharedXAxis
-import java.time.LocalDate
 
 @Composable
 fun Quote(
@@ -23,7 +22,7 @@ fun Quote(
     iconContentDescription: String?,
     label: String,
     modifier: Modifier = Modifier,
-    date: LocalDate? = null,
+    author: String? = null,
 ) {
     val density = LocalDensity.current
 
@@ -35,11 +34,14 @@ fun Quote(
             imageVector = icon,
             contentDescription = iconContentDescription,
         )
-        Text(text = label.uppercase())
+        Text(
+            text = label.uppercase(),
+            fontWeight = FontWeight.SemiBold,
+        )
         AnimatedContent(
-            targetState = quote,
+            targetState = quote to author,
             transitionSpec = { density.sharedXAxis() },
-        ) { quote ->
+        ) { (quote, author) ->
             Column(
                 verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
             ) {
@@ -47,8 +49,8 @@ fun Quote(
                     text = quote,
                     style = MaterialTheme.typography.titleLarge,
                 )
-                if (date != null) {
-                    Text(text = date.formatted())
+                if (author != null) {
+                    Text(text = author)
                 }
             }
         }

@@ -3,8 +3,8 @@ package com.thebrownfoxx.quotegenerator.data
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import com.thebrownfoxx.quotegenerator.logic.FavoriteQuote
-import com.thebrownfoxx.quotegenerator.logic.Quote
 import com.thebrownfoxx.quotegenerator.logic.QuoteCategory
+import com.thebrownfoxx.quotegenerator.logic.toQuote
 import kotlinx.coroutines.flow.map
 import java.time.LocalDate
 
@@ -17,7 +17,7 @@ val Context.favoriteQuote
             ?.let { LocalDate.ofEpochDay(it) }
         if (favoriteQuote != null && category != null && dateFavorited != null) {
             FavoriteQuote(
-                quote = Quote(favoriteQuote, category),
+                quote = favoriteQuote.toQuote(category),
                 dateFavorited = dateFavorited,
             )
         } else null
@@ -26,7 +26,7 @@ val Context.favoriteQuote
 suspend fun Context.setFavoriteQuote(favoriteQuote: FavoriteQuote?) {
     dataStore.edit { preferences ->
         if (favoriteQuote != null) {
-            preferences[PreferenceKey.FavoriteQuote] = favoriteQuote.quote.value
+            preferences[PreferenceKey.FavoriteQuote] = favoriteQuote.quote.quoteAndAuthorString
             preferences[PreferenceKey.FavoriteQuoteCategory] = favoriteQuote.quote.category.name
             preferences[PreferenceKey.DateQuoteFavorited] = favoriteQuote.dateFavorited.toEpochDay()
         } else {

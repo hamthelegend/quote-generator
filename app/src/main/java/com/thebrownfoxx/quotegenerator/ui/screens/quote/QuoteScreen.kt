@@ -64,6 +64,7 @@ fun QuoteScreen(
             ) {
                 Quote(
                     quote = quote.value,
+                    author = quote.author,
                     icon = quote.category.icon,
                     iconContentDescription = stringResource(
                         quote.category.iconContentDescriptionResourceId

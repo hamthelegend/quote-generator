@@ -22,6 +22,7 @@ import com.thebrownfoxx.quotegenerator.logic.FavoriteQuote
 import com.thebrownfoxx.quotegenerator.ui.SampleQuote
 import com.thebrownfoxx.quotegenerator.ui.components.BackButton
 import com.thebrownfoxx.quotegenerator.ui.components.Quote
+import com.thebrownfoxx.quotegenerator.ui.extension.formatted
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorIcons
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 import java.time.LocalDate
@@ -48,10 +49,11 @@ fun FavoriteQuoteScreen(
             Quote(
                 quote = favoriteQuote?.quote?.value
                     ?: stringResource(R.string.no_favorite_quote_guide),
+                author = favoriteQuote?.quote?.author,
                 icon = QuoteGeneratorIcons.Star,
                 iconContentDescription = stringResource(id = R.string.star_icon),
-                label = stringResource(id = R.string.favorite_quote),
-                date = favoriteQuote?.dateFavorited,
+                label = favoriteQuote?.dateFavorited?.formatted()
+                    ?: stringResource(id = R.string.favorite_quote),
                 modifier = Modifier
                     .padding(24.dp)
                     .fillMaxWidth()

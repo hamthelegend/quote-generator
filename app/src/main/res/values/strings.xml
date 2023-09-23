@@ -19,4 +19,5 @@
     <string name="funny_quote">Funny Quote</string>
 
     <string name="no_favorite_quote_guide">Favorite a quote first.</string>
+    <string name="unstar_icon">Unstar icon</string>
 </resources>
