@@ -22,7 +22,7 @@ import com.thebrownfoxx.quotegenerator.ui.SampleQuote
 import com.thebrownfoxx.quotegenerator.ui.components.BackButton
 import com.thebrownfoxx.quotegenerator.ui.components.Quote
 import com.thebrownfoxx.quotegenerator.ui.components.icon
-import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescriptionResourceId
+import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescription
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 
 @Composable
@@ -66,9 +66,7 @@ fun QuoteScreen(
                     quote = quote.value,
                     author = quote.author,
                     icon = quote.category.icon,
-                    iconContentDescription = stringResource(
-                        quote.category.iconContentDescriptionResourceId
-                    ),
+                    iconContentDescription = quote.category.iconContentDescription,
                     label = label,
                 )
             }

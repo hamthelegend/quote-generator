@@ -52,7 +52,7 @@ fun FavoriteButton(
     )
 
     val iconScale = remember { Animatable(0.75f) }
-    val rotation = remember { Animatable(360f) }
+    val rotation = remember { Animatable(72f) }
 
     val animationScope = rememberCoroutineScope()
     fun animateIcon() {
@@ -68,16 +68,15 @@ fun FavoriteButton(
                 iconScale.animateTo(
                     targetValue = 0.75f,
                     animationSpec = tween(
-                        delayMillis = 200,
                         durationMillis = 300,
                         easing = FastOutSlowInEasing,
                     )
                 )
             }
             launch {
-                rotation.snapTo(rotation.value - 360f)
+                rotation.snapTo(rotation.value - 72f)
                 rotation.animateTo(
-                    targetValue = 360f,
+                    targetValue = 72f,
                     animationSpec = tween(
                         durationMillis = 500,
                     )

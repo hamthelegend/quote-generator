@@ -43,7 +43,7 @@ fun Navigator(
                 quote == null -> {
                     HomeScreen(
                         quoteOfTheDay = quoteOfTheDay,
-                        onShowQuoteCategory = ::onShowQuote,
+                        onShowQuote = ::onChangeCategory,
                         onShowFavoriteQuote = ::onShowFavoriteQuote,
                         hasFavoriteQuote = favoriteQuote != null,
                     )

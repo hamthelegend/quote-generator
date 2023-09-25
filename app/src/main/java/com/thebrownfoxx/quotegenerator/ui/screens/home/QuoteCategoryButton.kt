@@ -1,9 +1,6 @@
 package com.thebrownfoxx.quotegenerator.ui.screens.home
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.twotone.AutoAwesome
-import androidx.compose.material.icons.twotone.Favorite
-import androidx.compose.material.icons.twotone.SentimentVerySatisfied
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -13,8 +10,7 @@ import com.thebrownfoxx.quotegenerator.R
 import com.thebrownfoxx.quotegenerator.logic.QuoteCategory
 import com.thebrownfoxx.quotegenerator.ui.components.HugeAssButton
 import com.thebrownfoxx.quotegenerator.ui.components.icon
-import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescriptionResourceId
-import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorIcons
+import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescription
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 
 @Composable
@@ -23,15 +19,17 @@ fun QuoteCategoryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val text = when (category) {
-        QuoteCategory.Love -> stringResource(R.string.love_quotes)
-        QuoteCategory.Inspirational -> stringResource(R.string.inspirational_quotes)
-        QuoteCategory.Funny -> stringResource(R.string.funny_quotes)
-    }
+    val text = stringResource(
+        when (category) {
+            QuoteCategory.Love -> R.string.love_quotes
+            QuoteCategory.Inspirational -> R.string.inspirational_quotes
+            QuoteCategory.Funny -> R.string.funny_quotes
+        }
+    )
 
     HugeAssButton(
         icon = category.icon,
-        iconContentDescription = stringResource(id = category.iconContentDescriptionResourceId),
+        iconContentDescription = category.iconContentDescription,
         text = text,
         onClick = onClick,
         modifier = modifier,
@@ -44,7 +42,7 @@ fun QuoteCategoryButtonPreview() {
     QuoteGeneratorTheme {
         QuoteCategoryButton(
             category = QuoteCategory.Love,
-            onClick = { /*TODO*/ },
+            onClick = {},
             modifier = Modifier.padding(16.dp)
         )
     }

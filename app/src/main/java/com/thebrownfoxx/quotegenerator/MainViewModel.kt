@@ -41,6 +41,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         quote = quote?.category?.getRandomQuote(previousQuote = quote)
     }
 
+    fun onChangeCategory(category: QuoteCategory) {
+        if (category != quote?.category) quote = category.getRandomQuote()
+    }
+
     fun onHideQuote() {
         quote = null
     }

@@ -19,13 +19,13 @@ import com.thebrownfoxx.quotegenerator.logic.QuoteCategory
 import com.thebrownfoxx.quotegenerator.ui.SampleQuote
 import com.thebrownfoxx.quotegenerator.ui.components.Quote
 import com.thebrownfoxx.quotegenerator.ui.components.icon
-import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescriptionResourceId
+import com.thebrownfoxx.quotegenerator.ui.components.iconContentDescription
 import com.thebrownfoxx.quotegenerator.ui.theme.QuoteGeneratorTheme
 
 @Composable
 fun HomeScreen(
     quoteOfTheDay: Quote,
-    onShowQuoteCategory: (QuoteCategory) -> Unit,
+    onShowQuote: (QuoteCategory) -> Unit,
     onShowFavoriteQuote: () -> Unit,
     hasFavoriteQuote: Boolean,
     modifier: Modifier = Modifier,
@@ -41,9 +41,7 @@ fun HomeScreen(
             Quote(
                 quote = quoteOfTheDay.value,
                 icon = quoteOfTheDay.category.icon,
-                iconContentDescription = stringResource(
-                    quoteOfTheDay.category.iconContentDescriptionResourceId
-                ),
+                iconContentDescription = quoteOfTheDay.category.iconContentDescription,
                 label = stringResource(R.string.quote_of_the_day),
                 modifier = Modifier
                     .padding(24.dp)
@@ -53,7 +51,7 @@ fun HomeScreen(
             for (category in QuoteCategory.values()) {
                 QuoteCategoryButton(
                     category = category,
-                    onClick = { onShowQuoteCategory(category) },
+                    onClick = { onShowQuote(category) },
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
@@ -72,7 +70,7 @@ fun HomeScreenPreview() {
     QuoteGeneratorTheme {
         HomeScreen(
             quoteOfTheDay = SampleQuote,
-            onShowQuoteCategory = {},
+            onShowQuote = {},
             onShowFavoriteQuote = {},
             hasFavoriteQuote = true,
         )

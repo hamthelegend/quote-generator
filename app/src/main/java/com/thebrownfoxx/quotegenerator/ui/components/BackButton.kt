@@ -2,6 +2,7 @@ package com.thebrownfoxx.quotegenerator.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.twotone.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -21,6 +22,7 @@ fun BackButton(
         contentDescription = stringResource(R.string.back_icon),
         onClick = onClick,
         modifier = modifier,
+        color = MaterialTheme.colorScheme.surfaceVariant,
     )
 }
 

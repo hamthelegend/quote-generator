@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.icons.twotone.Star
 import androidx.compose.material3.Surface
@@ -69,7 +70,7 @@ fun FavoriteQuoteScreen(
                     onClick = onUnfavorite,
                     enabled = favoriteQuote != null,
                 )
-                Spacer(modifier = Modifier.padding(32.dp))
+                Spacer(modifier = Modifier.size(72.dp))
             }
         }
     }

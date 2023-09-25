@@ -2,7 +2,9 @@ package com.thebrownfoxx.quotegenerator.ui.components
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,17 +32,33 @@ fun Quote(
         verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
         modifier = modifier,
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = iconContentDescription,
-        )
-        Text(
-            text = label.uppercase(),
-            fontWeight = FontWeight.SemiBold,
-        )
+        AnimatedContent(
+            targetState = icon,
+            transitionSpec = { density.sharedXAxis() },
+            modifier = Modifier.fillMaxWidth(),
+        ) { icon ->
+            Box {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = iconContentDescription,
+                    modifier = Modifier.align(Alignment.CenterStart),
+                )
+            }
+        }
+        AnimatedContent(
+            targetState = label,
+            transitionSpec = { density.sharedXAxis() },
+            modifier = Modifier.fillMaxWidth(),
+        ) { label ->
+            Text(
+                text = label.uppercase(),
+                fontWeight = FontWeight.SemiBold,
+            )
+        }
         AnimatedContent(
             targetState = quote to author,
             transitionSpec = { density.sharedXAxis() },
+            modifier = Modifier.fillMaxWidth(),
         ) { (quote, author) ->
             Column(
                 verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),

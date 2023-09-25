@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.thebrownfoxx.quotegenerator.ui.extension.Elevation
 
@@ -32,11 +33,11 @@ fun HugeAssButton(
     contentColor: Color = contentColorFor(backgroundColor = color),
     enabled: Boolean = true,
 ) {
-    val _color by animateColorAsState(
+    val animatedColor by animateColorAsState(
         if (enabled) color
         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
     )
-    val _contentColor by animateColorAsState(
+    val animatedContentColor by animateColorAsState(
         if (enabled) contentColor
         else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
     )
@@ -44,8 +45,8 @@ fun HugeAssButton(
     Surface(
         onClick = onClick,
         shape = CircleShape,
-        color = _color,
-        contentColor = _contentColor,
+        color = animatedColor,
+        contentColor = animatedContentColor,
         tonalElevation = Elevation.level(2),
         modifier = modifier,
         enabled = enabled,
@@ -62,6 +63,7 @@ fun HugeAssButton(
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold,
             )
         }
     }

@@ -20,4 +20,7 @@
 
     <string name="no_favorite_quote_guide">Favorite a quote first.</string>
     <string name="unstar_icon">Unstar icon</string>
+    <string name="love">Love</string>
+    <string name="inspirational">Inspirational</string>
+    <string name="funny">Funny</string>
 </resources>
