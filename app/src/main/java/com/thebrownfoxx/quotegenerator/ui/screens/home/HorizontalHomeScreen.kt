@@ -39,15 +39,16 @@ fun HorizontalHomeScreen(
     Surface {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
             modifier = Modifier.padding(horizontal = 24.dp),
         ) {
+            Spacer(modifier = Modifier.width(24.dp))
             Column(
                 modifier = modifier
                     .weight(1f)
                     .verticalScroll(state = rememberScrollState())
                     .systemBarsPadding(),
-                verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
             ) {
                 Spacer(modifier = Modifier.height(24.dp))
                 Quote(
