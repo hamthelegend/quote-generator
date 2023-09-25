@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -36,19 +35,18 @@ fun HorizontalHomeScreen(
     hasFavoriteQuote: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Surface {
+    Surface(modifier = modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
-            modifier = Modifier.padding(horizontal = 24.dp),
+            horizontalArrangement = Arrangement.Center,
         ) {
-            Spacer(modifier = Modifier.width(24.dp))
+            Spacer(modifier = Modifier.width(48.dp))
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .weight(1f)
                     .verticalScroll(state = rememberScrollState())
                     .systemBarsPadding(),
-                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                verticalArrangement = Arrangement.Center,
             ) {
                 Spacer(modifier = Modifier.height(24.dp))
                 Quote(
@@ -59,12 +57,13 @@ fun HorizontalHomeScreen(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
             }
+            Spacer(modifier = Modifier.width(48.dp))
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .width(IntrinsicSize.Max)
                     .verticalScroll(state = rememberScrollState())
                     .systemBarsPadding(),
-                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                verticalArrangement = Arrangement.Center
             ) {
                 Spacer(modifier = Modifier.height(24.dp))
                 for (category in QuoteCategory.values()) {
@@ -73,6 +72,7 @@ fun HorizontalHomeScreen(
                         onClick = { onShowQuote(category) },
                         modifier = Modifier.fillMaxWidth(),
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
                 FavoriteQuoteButton(
                     onClick = onShowFavoriteQuote,
@@ -81,6 +81,7 @@ fun HorizontalHomeScreen(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
             }
+            Spacer(modifier = Modifier.width(24.dp))
         }
     }
 }

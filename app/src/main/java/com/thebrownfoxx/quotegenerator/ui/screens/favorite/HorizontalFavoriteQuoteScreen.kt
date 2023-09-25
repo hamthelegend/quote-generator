@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
@@ -36,15 +36,14 @@ fun HorizontalFavoriteQuoteScreen(
     onUnfavorite: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Surface {
+    Surface(modifier = modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterHorizontally),
-            modifier = Modifier.padding(horizontal = 24.dp),
+            horizontalArrangement = Arrangement.Center,
         ) {
-            Spacer(modifier = Modifier.width(24.dp))
+            Spacer(modifier = Modifier.width(48.dp))
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .weight(1f)
                     .verticalScroll(state = rememberScrollState())
                     .systemBarsPadding(),
@@ -62,20 +61,26 @@ fun HorizontalFavoriteQuoteScreen(
                 )
                 Spacer(modifier = Modifier.height(24.dp))
             }
+            Spacer(modifier = Modifier.width(48.dp))
             Column(
-                modifier = modifier.systemBarsPadding(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+                verticalArrangement = Arrangement.Center,
+                modifier = modifier
+                    .systemBarsPadding()
+                    .fillMaxHeight(),
             ) {
                 Spacer(modifier = Modifier.height(24.dp))
                 Spacer(modifier = Modifier.size(72.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 UnfavoriteButton(
                     onClick = onUnfavorite,
                     enabled = favoriteQuote != null,
                 )
+                Spacer(modifier = Modifier.height(16.dp))
                 BackButton(onClick = onGoBack)
                 Spacer(modifier = Modifier.height(24.dp))
             }
+            Spacer(modifier = Modifier.width(24.dp))
         }
     }
 }
